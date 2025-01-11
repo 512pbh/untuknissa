@@ -96,7 +96,7 @@
             max-height: 90%;
         }
 
-
+        /* Responsif untuk tablet dan ukuran layar lebih kecil */
         @media screen and (max-width: 1024px) {
             header h1 span {
                 font-size: 55px;
@@ -149,16 +149,16 @@
 </div>
 
 <script>
-    
+    // Ambil semua gambar
     const images = document.querySelectorAll('.gallery img');
 
-    
+    // Buat overlay untuk full screen
     const fullscreenDiv = document.createElement('div');
     fullscreenDiv.classList.add('fullscreen');
     fullscreenDiv.style.display = 'none';  // Sembunyikan overlay awalnya
     document.body.appendChild(fullscreenDiv);
 
-    
+    // Fungsi untuk menampilkan gambar full screen
     function showFullscreen(event) {
         const imgSrc = event.target.src;
         const img = document.createElement('img');
@@ -168,17 +168,17 @@
         fullscreenDiv.style.display = 'flex'; // Tampilkan overlay
     }
 
-    
+    // Fungsi untuk menutup gambar full screen
     function closeFullscreen() {
         fullscreenDiv.style.display = 'none'; // Sembunyikan overlay
     }
 
-    
+    // Tambahkan event listener ke setiap gambar
     images.forEach(image => {
         image.addEventListener('click', showFullscreen);
     });
 
-    
+    // Tambahkan event listener untuk menutup ketika area klik di luar gambar
     fullscreenDiv.addEventListener('click', closeFullscreen);
 </script>
 
