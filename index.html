@@ -28,15 +28,15 @@
         }
 
         header h1 img {
-            width: 100px; 
-            height: 150px;
+            width: 80px; /* Mengurangi ukuran logo */
+            height: auto;
             margin-left: 10px;
             border-radius: 30px;
         }
 
         header h1 span {
             margin-left: 10px;
-            font-size: 80px;
+            font-size: 70px;
             position: relative;
             background: linear-gradient(90deg, #ff6f61, #ff1493, #ff69b4, #db7093, #ff6f61);
             background-size: 300%;
@@ -59,31 +59,52 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 25px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
             padding: 40px;
         }
 
         .gallery img {
             width: 100%;
             height: auto;
-            border-radius: 30px;
-            align-items: center;
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.1s;
+            cursor: pointer;
         }
 
         .gallery img:hover {
             transform: scale(1.05);
         }
 
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            cursor: pointer;
+        }
+
+        .fullscreen img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+
         @media screen and (max-width: 1024px) {
             header h1 span {
-                font-size: 60px;
+                font-size: 55px;
             }
 
             .gallery {
                 grid-template-columns: repeat(3, 1fr);
+                padding: 30px;
             }
         }
 
@@ -126,6 +147,40 @@
     <img src="foto5.jpg" alt="Foto 5">
     <img src="foto6.jpg" alt="Foto 6">
 </div>
+
+<script>
+    
+    const images = document.querySelectorAll('.gallery img');
+
+    
+    const fullscreenDiv = document.createElement('div');
+    fullscreenDiv.classList.add('fullscreen');
+    fullscreenDiv.style.display = 'none';  // Sembunyikan overlay awalnya
+    document.body.appendChild(fullscreenDiv);
+
+    
+    function showFullscreen(event) {
+        const imgSrc = event.target.src;
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        fullscreenDiv.innerHTML = ''; // Hapus konten sebelumnya
+        fullscreenDiv.appendChild(img);
+        fullscreenDiv.style.display = 'flex'; // Tampilkan overlay
+    }
+
+    
+    function closeFullscreen() {
+        fullscreenDiv.style.display = 'none'; // Sembunyikan overlay
+    }
+
+    
+    images.forEach(image => {
+        image.addEventListener('click', showFullscreen);
+    });
+
+    
+    fullscreenDiv.addEventListener('click', closeFullscreen);
+</script>
 
 </body>
 </html>
